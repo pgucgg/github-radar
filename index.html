@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GitHub 星标雷达</title>
+<meta name="description" content="每日 GitHub 增长榜单：涨星榜与新锐榜">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <span class="dot"></span>
+      <h1>GitHub 星标雷达</h1>
+    </div>
+    <div class="meta">
+      <span class="date-label" id="dataDate">—</span>
+      <select id="datePicker" class="date-picker" aria-label="选择历史日期"></select>
+    </div>
+  </header>
+
+  <div class="notice" id="staleNotice" hidden></div>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab is-active" data-board="growth" role="tab" aria-selected="true">
+      涨星榜 <span class="tab-sub">当日增量</span>
+    </button>
+    <button class="tab" data-board="rising" role="tab" aria-selected="false">
+      新锐榜 <span class="tab-sub">60 天内新建</span>
+    </button>
+    <button class="tab tab-fav" data-board="favs" role="tab" aria-selected="false">
+      收藏 <span class="badge-count" id="favCount">0</span>
+    </button>
+  </nav>
+
+  <div class="legend" id="legend">
+    <span class="lg"><i class="chip chip-debut"></i>头回上榜</span>
+    <span class="lg"><i class="chip chip-return"></i>回头上榜</span>
+    <span class="lg"><i class="chip chip-fast"></i>比昨天快</span>
+    <span class="lg"><i class="chip chip-milestone"></i>破阈值</span>
+  </div>
+
+  <main class="boards">
+    <section class="board is-active" id="board-growth" role="tabpanel"></section>
+    <section class="board" id="board-rising" role="tabpanel"></section>
+    <section class="board" id="board-favs" role="tabpanel"></section>
+  </main>
+
+  <footer class="foot">
+    <span>数据源 GitHub Search API · 日增 = 今日 star − 昨日快照</span>
+    <span id="genTime"></span>
+  </footer>
+</div>
+
+<!-- 详情抽屉 -->
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-modal="true" role="dialog">
+  <button class="drawer-close" id="drawerClose" aria-label="关闭">×</button>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
