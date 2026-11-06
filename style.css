@@ -158,6 +158,26 @@ body{
 .bdg-fast{color:var(--green);border-color:rgba(48,164,108,.4);background:rgba(48,164,108,.1)}
 .bdg-milestone{color:var(--gold);border-color:rgba(232,179,57,.4);background:rgba(232,179,57,.1)}
 
+/* 分类标签 */
+.cat-tag{
+  color:var(--accent);
+  border:1px solid rgba(94,106,210,.32);
+  background:rgba(94,106,210,.1);
+  border-radius:4px;padding:1px 6px;font-size:10.5px;
+}
+/* 英文原文标记 */
+.desc-tag{
+  font-size:10px;color:var(--txt-mute);
+  border:1px solid var(--line);border-radius:3px;
+  padding:0 4px;margin-right:5px;vertical-align:1px;
+  font-family:var(--sans);
+}
+/* 详情里的分类行 */
+.d-cat{
+  font-size:11.5px;color:var(--accent);margin:-8px 0 14px;
+  font-family:var(--mono);
+}
+
 /* ---------- 空态 ---------- */
 .empty{
   text-align:center;padding:52px 20px;color:var(--txt-mute);font-size:13px;
