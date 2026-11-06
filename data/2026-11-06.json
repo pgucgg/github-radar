@@ -1,6 +1,6 @@
 {
  "date": "2026-11-06",
- "generated_at": "2026-11-06T18:11:00.243290+08:00",
+ "generated_at": "2026-11-06T18:25:05.592712+08:00",
  "stale": false,
  "stale_from": null,
  "candidates": 200,
@@ -47,10 +47,14 @@
    "badge_faster": false,
    "badge_milestones": [],
    "rank": 1,
-   "open_issues": 176,
+   "open_issues": 177,
    "homepage": "https://contribute.freecodecamp.org",
    "readme_summary": "[freeCodeCamp.org](https://www.freecodecamp.org) is a friendly community where you can learn to code for free. It is run by a [donor-supported 501(c)(3) charity](https://www.freecodecamp.org/donate) to help millions of busy adults transitio",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "文档/知识",
+   "desc_zh": "",
+   "desc_fallback_en": true,
+   "desc_en_short": "freeCodeCamp"
   },
   {
    "full_name": "morluto/rea",
@@ -58,10 +62,10 @@
    "owner": "morluto",
    "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
    "language": "TypeScript",
-   "stars": 435985,
-   "forks": 108149,
+   "stars": 436014,
+   "forks": 108156,
    "created_at": "2026-04-14T00:51:32Z",
-   "pushed_at": "2026-11-06T09:56:52Z",
+   "pushed_at": "2026-11-06T10:21:06Z",
    "license": "MIT",
    "html_url": "https://github.com/morluto/rea",
    "topics": [
@@ -98,10 +102,14 @@
    "badge_faster": false,
    "badge_milestones": [],
    "rank": 2,
-   "open_issues": 1586,
+   "open_issues": 1591,
    "homepage": "https://rea.tools",
    "readme_summary": "**English** · [简体中文](docs/readme/README_zh.md) · [繁體中文](docs/readme/README_zh-TW.md) · [日本語](docs/readme/README_ja.md) · [한국어](docs/readme/README_ko.md) · [Türkçe](docs/readme/README_tr.md) · [Русский](docs/readme/README_ru.md) · [Tiếng Việ",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "AI/大模型",
+   "desc_zh": "使用代理对任何内容进行反向工程，从应用行为到本机二进制文件",
+   "desc_fallback_en": false,
+   "desc_en_short": "Reverse engineer anything with agents, from app behavior dow"
   },
   {
    "full_name": "openclaw/openclaw",
@@ -109,10 +117,10 @@
    "owner": "openclaw",
    "description": "The AI that really does things. Any OS. Any Platform. The lobster way. 🦞 ",
    "language": "TypeScript",
-   "stars": 394025,
-   "forks": 82807,
+   "stars": 394027,
+   "forks": 82808,
    "created_at": "2025-11-24T10:16:47Z",
-   "pushed_at": "2026-11-06T10:07:37Z",
+   "pushed_at": "2026-11-06T10:22:54Z",
    "license": "MIT",
    "html_url": "https://github.com/openclaw/openclaw",
    "topics": [
@@ -136,10 +144,14 @@
    "badge_faster": false,
    "badge_milestones": [],
    "rank": 3,
-   "open_issues": 7607,
+   "open_issues": 7610,
    "homepage": "https://openclaw.ai",
    "readme_summary": "",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "其他",
+   "desc_zh": "真正做事情的人工智能",
+   "desc_fallback_en": false,
+   "desc_en_short": "The AI that really does things"
   },
   {
    "full_name": "nilbuild/developer-roadmap",
@@ -148,7 +160,7 @@
    "description": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.",
    "language": "TypeScript",
    "stars": 371371,
-   "forks": 45331,
+   "forks": 45333,
    "created_at": "2017-03-15T13:45:52Z",
    "pushed_at": "2026-11-06T08:03:52Z",
    "license": "NOASSERTION",
@@ -188,7 +200,11 @@
    "open_issues": 5,
    "homepage": "https://roadmap.sh",
    "readme_summary": "roadmap.sh Community-driven roadmaps, articles and resources for developers",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "文档/知识",
+   "desc_zh": "交互式路线图、指南和其他教育内容，帮助开发人员在职业生涯中成长",
+   "desc_fallback_en": false,
+   "desc_en_short": "Interactive roadmaps, guides and other educational content t"
   },
   {
    "full_name": "jwasham/coding-interview-university",
@@ -197,7 +213,7 @@
    "description": "A complete computer science study plan to become a software engineer.",
    "language": "",
    "stars": 364021,
-   "forks": 85288,
+   "forks": 85290,
    "created_at": "2016-06-06T02:34:12Z",
    "pushed_at": "2026-11-06T09:57:03Z",
    "license": "CC-BY-SA-4.0",
@@ -231,7 +247,11 @@
    "open_issues": 131,
    "homepage": "",
    "readme_summary": "> I originally created this as a short to-do list of study topics for becoming a software engineer, > but it grew to the large list you see today. After going through this study plan, [I got hired > as a Software Development Engineer at Ama",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "文档/知识",
+   "desc_zh": "一个完整的计算机科学学习计划，成为一名软件工程师",
+   "desc_fallback_en": false,
+   "desc_en_short": "A complete computer science study plan to become a software"
   },
   {
    "full_name": "vinta/awesome-python",
@@ -239,7 +259,7 @@
    "owner": "vinta",
    "description": "The definitive list that answers \"I want to do X in Python, which tool should I use?\"",
    "language": "Python",
-   "stars": 332857,
+   "stars": 332860,
    "forks": 29057,
    "created_at": "2014-06-27T21:00:06Z",
    "pushed_at": "2026-11-06T02:37:29Z",
@@ -268,7 +288,11 @@
    "open_issues": 20,
    "homepage": "https://awesome-python.com/",
    "readme_summary": "An opinionated guide to the best Python frameworks, libraries, and tools. **Visit the [website](https://awesome-python.com/) to search and filter projects more easily.** - [iPulse AI](https://ipulseai.com?utm_source=awesome-python&utm_mediu",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "文档/知识",
+   "desc_zh": "回答“我想在Python中做X ，我应该使用哪个工具",
+   "desc_fallback_en": false,
+   "desc_en_short": "The definitive list that answers \"I want to do X in Python"
   },
   {
    "full_name": "affaan-m/ECC",
@@ -276,8 +300,8 @@
    "owner": "affaan-m",
    "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
    "language": "JavaScript",
-   "stars": 298144,
-   "forks": 44084,
+   "stars": 298154,
+   "forks": 44086,
    "created_at": "2026-01-18T00:51:51Z",
    "pushed_at": "2026-11-06T05:29:44Z",
    "license": "MIT",
@@ -307,7 +331,11 @@
    "open_issues": 234,
    "homepage": "https://ecc.tools",
    "readme_summary": "",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "AI/大模型",
+   "desc_zh": "座席线束性能优化系统",
+   "desc_fallback_en": false,
+   "desc_en_short": "The agent harness performance optimization system"
   },
   {
    "full_name": "NousResearch/hermes-agent",
@@ -315,10 +343,10 @@
    "owner": "NousResearch",
    "description": "The agent that grows with you",
    "language": "Python",
-   "stars": 261014,
-   "forks": 57678,
+   "stars": 261019,
+   "forks": 57681,
    "created_at": "2025-07-22T22:22:28Z",
-   "pushed_at": "2026-11-06T09:45:27Z",
+   "pushed_at": "2026-11-06T10:20:30Z",
    "license": "MIT",
    "html_url": "https://github.com/NousResearch/hermes-agent",
    "topics": [
@@ -351,7 +379,11 @@
    "open_issues": 53219,
    "homepage": "https://hermes-agent.nousresearch.com",
    "readme_summary": "Hermes Agent | Hermes Desktop",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "AI/大模型",
+   "desc_zh": "与您一起成长的客服代表",
+   "desc_fallback_en": false,
+   "desc_en_short": "The agent that grows with you"
   },
   {
    "full_name": "torvalds/linux",
@@ -359,8 +391,8 @@
    "owner": "torvalds",
    "description": "Linux kernel source tree",
    "language": "C",
-   "stars": 254543,
-   "forks": 67134,
+   "stars": 254544,
+   "forks": 67135,
    "created_at": "2011-09-04T22:48:12Z",
    "pushed_at": "2026-11-06T02:34:13Z",
    "license": "NOASSERTION",
@@ -381,7 +413,11 @@
    "open_issues": 3,
    "homepage": "",
    "readme_summary": "Linux kernel ============ The Linux kernel is the core of any Linux operating system. It manages hardware, system resources, and provides the fundamental services for all other software. Quick Start ----------- * Report a bug: See Documenta",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "系统/底层",
+   "desc_zh": "",
+   "desc_fallback_en": true,
+   "desc_en_short": "Linux kernel source tree"
   },
   {
    "full_name": "react/react",
@@ -389,8 +425,8 @@
    "owner": "react",
    "description": "The library for web and native user interfaces.",
    "language": "JavaScript",
-   "stars": 252023,
-   "forks": 51762,
+   "stars": 252024,
+   "forks": 51765,
    "created_at": "2013-05-24T16:15:54Z",
    "pushed_at": "2026-11-06T09:23:04Z",
    "license": "MIT",
@@ -418,7 +454,11 @@
    "open_issues": 1516,
    "homepage": "https://react.dev",
    "readme_summary": "React is a JavaScript library for building user interfaces. * **Declarative:** React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the ",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "前端/UI",
+   "desc_zh": "用于Web和本机用户界面的库",
+   "desc_fallback_en": false,
+   "desc_en_short": "The library for web and native user interfaces"
   }
  ],
  "rising": [
@@ -428,8 +468,8 @@
    "owner": "deepseek-ai",
    "description": "Towards a More Autonomous Agent System",
    "language": "TypeScript",
-   "stars": 19938,
-   "forks": 2306,
+   "stars": 19950,
+   "forks": 2307,
    "created_at": "2026-10-31T09:32:46Z",
    "pushed_at": "2026-11-03T09:29:14Z",
    "license": "MIT",
@@ -438,7 +478,7 @@
    "archived": false,
    "age_days": 6,
    "daily_gain": null,
-   "growth_7d": 23261,
+   "growth_7d": 23275,
    "rate_basis": "average-since-created",
    "relative_rate": 1.1667,
    "on_board_days": 1,
@@ -451,7 +491,11 @@
    "open_issues": 0,
    "homepage": "",
    "readme_summary": "> **Research prototype for reference only, not an official DeepSeek product.** This code grew out of our team's day-to-day development work, with much of the engineering done by coding agents. Treat it as research code, not production-ready",
-   "days_since_push": 3
+   "days_since_push": 3,
+   "category": "AI/大模型",
+   "desc_zh": "迈向更自主的Agent系统",
+   "desc_fallback_en": false,
+   "desc_en_short": "Towards a More Autonomous Agent System"
   },
   {
    "full_name": "storytold/craft-anything",
@@ -459,8 +503,8 @@
    "owner": "storytold",
    "description": "Craft Anything: understand how any software works, and craft your own.",
    "language": "Rust",
-   "stars": 16376,
-   "forks": 2939,
+   "stars": 16399,
+   "forks": 2945,
    "created_at": "2026-10-31T14:50:00Z",
    "pushed_at": "2026-11-06T07:22:09Z",
    "license": "Apache-2.0",
@@ -469,9 +513,9 @@
    "archived": false,
    "age_days": 6,
    "daily_gain": null,
-   "growth_7d": 19105,
+   "growth_7d": 19132,
    "rate_basis": "average-since-created",
-   "relative_rate": 1.1666,
+   "relative_rate": 1.1667,
    "on_board_days": 1,
    "first_day": true,
    "badge_debut": true,
@@ -482,7 +526,11 @@
    "open_issues": 305,
    "homepage": "",
    "readme_summary": "",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "系统/底层",
+   "desc_zh": "制作任何东西：了解任何软件的工作原理，并制作自己的软件",
+   "desc_fallback_en": false,
+   "desc_en_short": "Craft Anything: understand how any software works, and craft"
   },
   {
    "full_name": "N1nEmAn/sapper-v2",
@@ -490,8 +538,8 @@
    "owner": "N1nEmAn",
    "description": "Autonomous pentest legion — AI commander + worker swarm + layered fact-intent graph. 3rd Tencent Intelligent Attack-Defense online champion (634 teams · 8h unattended · 1B tokens beat 4.5B). The Nüwa Test: give AIs Create/Language/History, let a civilization grow.",
    "language": "Python",
-   "stars": 1413,
-   "forks": 805,
+   "stars": 1415,
+   "forks": 806,
    "created_at": "2026-10-30T15:12:35Z",
    "pushed_at": "2026-11-03T12:47:08Z",
    "license": "MIT",
@@ -508,7 +556,7 @@
    "archived": false,
    "age_days": 7,
    "daily_gain": null,
-   "growth_7d": 1413,
+   "growth_7d": 1415,
    "rate_basis": "average-since-created",
    "relative_rate": 1.0,
    "on_board_days": 1,
@@ -521,7 +569,11 @@
    "open_issues": 4,
    "homepage": "",
    "readme_summary": "> **Champion** of the 3rd Tencent Cloud Intelligent Attack-Defense Challenge online qualifier",
-   "days_since_push": 3
+   "days_since_push": 3,
+   "category": "AI/大模型",
+   "desc_zh": "自主Pentest军团— AI指挥官+工作者群体+分层事实意图",
+   "desc_fallback_en": false,
+   "desc_en_short": "Autonomous pentest legion — AI commander + worker swarm + la"
   },
   {
    "full_name": "heydamir/unslop",
@@ -529,7 +581,7 @@
    "owner": "heydamir",
    "description": "A Claude skill that turns vibecoded, AI-looking UI into a designed interface",
    "language": "JavaScript",
-   "stars": 10268,
+   "stars": 10276,
    "forks": 551,
    "created_at": "2026-10-29T15:41:21Z",
    "pushed_at": "2026-11-01T16:46:10Z",
@@ -539,7 +591,7 @@
    "archived": false,
    "age_days": 8,
    "daily_gain": null,
-   "growth_7d": 8984,
+   "growth_7d": 8992,
    "rate_basis": "average-since-created",
    "relative_rate": 0.875,
    "on_board_days": 1,
@@ -552,7 +604,11 @@
    "open_issues": 10,
    "homepage": "",
    "readme_summary": "Created by Damir Sokolovsky ([@heydamir](https://x.com/heydamir)), who started the [Unslopping series](https://x.com/heydamir/status/2115063463063998736) on X. unslop is a skill for Claude Code and Codex that turns vibecoded, AI-looking UI ",
-   "days_since_push": 5
+   "days_since_push": 5,
+   "category": "其他",
+   "desc_zh": "一种克劳德技能，将振动编码的人工智能外观用户界面转变为设计界面",
+   "desc_fallback_en": false,
+   "desc_en_short": "A Claude skill that turns vibecoded, AI-looking UI into a de"
   },
   {
    "full_name": "wangzan101/Mika",
@@ -560,8 +616,8 @@
    "owner": "wangzan101",
    "description": "An on-device AI agent for Android that operates apps and the web to get things done for you.",
    "language": "Kotlin",
-   "stars": 7293,
-   "forks": 1672,
+   "stars": 7294,
+   "forks": 1673,
    "created_at": "2026-10-29T14:34:07Z",
    "pushed_at": "2026-11-06T09:20:10Z",
    "license": "Apache-2.0",
@@ -579,9 +635,9 @@
    "archived": false,
    "age_days": 8,
    "daily_gain": null,
-   "growth_7d": 6381,
+   "growth_7d": 6382,
    "rate_basis": "average-since-created",
-   "relative_rate": 0.8749,
+   "relative_rate": 0.875,
    "on_board_days": 1,
    "first_day": true,
    "badge_debut": true,
@@ -592,7 +648,11 @@
    "open_issues": 113,
    "homepage": "",
    "readme_summary": "**An AI assistant on your phone: say what you need, and it works your apps and the web until it's done.** It works on a hidden background screen, so you can keep using your phone.",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "AI/大模型",
+   "desc_zh": "适用于Android的设备上AI代理，可运行应用程序和网络，为您完成任务",
+   "desc_fallback_en": false,
+   "desc_en_short": "An on-device AI agent for Android that operates apps and the"
   },
   {
    "full_name": "modelflare-ai/AnyModelBot",
@@ -644,7 +704,11 @@
    "open_issues": 0,
    "homepage": "https://anymodel.bot/",
    "readme_summary": "",
-   "days_since_push": 1
+   "days_since_push": 1,
+   "category": "AI/大模型",
+   "desc_zh": "",
+   "desc_fallback_en": true,
+   "desc_en_short": "🤖 Open-source, local-first alternative to Grok Bot, OpenAI d"
   },
   {
    "full_name": "jackwener/DSH-Android",
@@ -683,7 +747,11 @@
    "open_issues": 17,
    "homepage": "",
    "readme_summary": "不要 root，不用电脑，直接跑在你的安卓手机上。真正的手机 Agent，替你把手机上的事干完。 在安卓手机上运行 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（dsh）：让它操作 App、整理文件、修改系统设置，或者自动执行任务。",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "AI/大模型",
+   "desc_zh": "",
+   "desc_fallback_en": true,
+   "desc_en_short": "免 ROOT 免 Termux，一个 APK 在安卓手机上跑 DeepSeek Harness"
   },
   {
    "full_name": "ccch1mneyyy/dsh-Go",
@@ -691,10 +759,10 @@
    "owner": "ccch1mneyyy",
    "description": "dsh-go — DeepSeek Harness 装进口袋：手机本机运行，也能遥控你的电脑。",
    "language": "Dart",
-   "stars": 12311,
+   "stars": 12336,
    "forks": 559,
    "created_at": "2026-10-25T08:09:52Z",
-   "pushed_at": "2026-11-06T10:09:17Z",
+   "pushed_at": "2026-11-06T10:23:41Z",
    "license": "AGPL-3.0",
    "html_url": "https://github.com/ccch1mneyyy/dsh-Go",
    "topics": [
@@ -713,7 +781,7 @@
    "archived": false,
    "age_days": 12,
    "daily_gain": null,
-   "growth_7d": 7181,
+   "growth_7d": 7196,
    "rate_basis": "average-since-created",
    "relative_rate": 0.5833,
    "on_board_days": 1,
@@ -726,7 +794,11 @@
    "open_issues": 311,
    "homepage": "",
    "readme_summary": "简体中文 · English",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "AI/大模型",
+   "desc_zh": "",
+   "desc_fallback_en": true,
+   "desc_en_short": "dsh-go — DeepSeek Harness 装进口袋：手机本机运行，也能遥控你的电脑"
   },
   {
    "full_name": "unclebob/ub-mode",
@@ -734,7 +806,7 @@
    "owner": "unclebob",
    "description": "",
    "language": "",
-   "stars": 7163,
+   "stars": 7164,
    "forks": 404,
    "created_at": "2026-10-25T16:04:09Z",
    "pushed_at": "2026-11-02T15:08:31Z",
@@ -744,7 +816,7 @@
    "archived": false,
    "age_days": 12,
    "daily_gain": null,
-   "growth_7d": 4178,
+   "growth_7d": 4179,
    "rate_basis": "average-since-created",
    "relative_rate": 0.5833,
    "on_board_days": 1,
@@ -757,7 +829,11 @@
    "open_issues": 10,
    "homepage": "",
    "readme_summary": "`ub-mode` is an agent skill that enforces disciplined software engineering principles when writing or changing code. It is loosely based on portions of [@poteto](https://github.com/poteto)'s rules (`poteto-mode` / `pstack`), reduced and pai",
-   "days_since_push": 4
+   "days_since_push": 4,
+   "category": "其他",
+   "desc_zh": "",
+   "desc_fallback_en": false,
+   "desc_en_short": ""
   },
   {
    "full_name": "l0ng-ai/openidea",
@@ -765,8 +841,8 @@
    "owner": "l0ng-ai",
    "description": "The IDE you know, rebuilt in Rust. IntelliJ IDEA–style keymap, tool windows and search-everywhere in a fast native app: editor, code insight, debugger, Git, terminal, database and HTTP clients for 60+ languages.",
    "language": "TypeScript",
-   "stars": 7205,
-   "forks": 606,
+   "stars": 7214,
+   "forks": 607,
    "created_at": "2026-10-21T12:23:14Z",
    "pushed_at": "2026-11-06T09:27:11Z",
    "license": "Apache-2.0",
@@ -791,7 +867,7 @@
    "archived": false,
    "age_days": 16,
    "daily_gain": null,
-   "growth_7d": 3152,
+   "growth_7d": 3156,
    "rate_basis": "average-since-created",
    "relative_rate": 0.4375,
    "on_board_days": 1,
@@ -801,10 +877,14 @@
    "badge_faster": false,
    "badge_milestones": [],
    "rank": 10,
-   "open_issues": 298,
+   "open_issues": 301,
    "homepage": "",
    "readme_summary": "",
-   "days_since_push": 0
+   "days_since_push": 0,
+   "category": "后端/服务",
+   "desc_zh": "您知道的IDE是在Rust中重建的",
+   "desc_fallback_en": false,
+   "desc_en_short": "The IDE you know, rebuilt in Rust"
   }
  ]
 }
