@@ -3,12 +3,15 @@
   'use strict';
 
   var FAV_KEY = 'gh-radar-favs';
+  var DISLIKE_KEY = 'gh-radar-dislikes';
   var state = {
     date: null,
     dates: [],
     snap: null,
     board: 'growth',
-    favs: loadFavs()
+    favs: loadFavs(),
+    dislikes: loadDislikes(),
+    showDisliked: false
   };
 
   /* ---------------- 工具 ---------------- */
@@ -53,6 +56,73 @@
     try { localStorage.setItem(FAV_KEY, JSON.stringify(state.favs)); }
     catch (e) { toast('收藏保存失败（存储空间不足）'); }
     updateFavCount();
+  }
+
+  /* ---------------- 踩（不感兴趣） ---------------- */
+  function loadDislikes() {
+    try {
+      var raw = localStorage.getItem(DISLIKE_KEY);
+      var v = raw ? JSON.parse(raw) : [];
+      return Array.isArray(v) ? v : [];
+    } catch (e) { return []; }
+  }
+
+  function saveDislikes() {
+    try { localStorage.setItem(DISLIKE_KEY, JSON.stringify(state.dislikes)); }
+    catch (e) { toast('保存失败（存储空间不足）'); }
+    updateDislikeCount();
+  }
+
+  function isDisliked(repo) {
+    return state.dislikes.some(function (d) { return d.repo === repo; });
+  }
+
+  /** 记录一条「踩」。可选带分类/语言，用于以后按类别降权。 */
+  function addDislike(repo, extra) {
+    if (isDisliked(repo)) return false;
+    // 从收藏里移除（踩和收藏互斥）
+    var fi = state.favs.findIndex(function (f) { return f.repo === repo; });
+    if (fi >= 0) { state.favs.splice(fi, 1); saveFavs(); }
+
+    state.dislikes.unshift({
+      repo: repo,
+      addedAt: new Date().toISOString(),
+      category: (extra && extra.category) || '',
+      language: (extra && extra.language) || '',
+      topics: (extra && extra.topics) || [],
+      description: (extra && extra.description) || '',
+      stars: extra && extra.stars != null ? extra.stars : null
+    });
+    saveDislikes();
+    return true;
+  }
+
+  /** 撤销一条踩 */
+  function removeDislike(repo) {
+    var i = state.dislikes.findIndex(function (d) { return d.repo === repo; });
+    if (i < 0) return false;
+    state.dislikes.splice(i, 1);
+    saveDislikes();
+    return true;
+  }
+
+  function updateDislikeCount() {
+    var el = $('dislikeCount');
+    if (el) el.textContent = String(state.dislikes.length);
+  }
+
+  /**
+   * 从「踩」记录推导出的偏好画像：
+   *  - 被踩最多的分类 / 语言，用于给同类仓库降权
+   *  - 已踩仓库列表，直接剔除
+   */
+  function preferenceProfile() {
+    var catCount = {}, langCount = {};
+    state.dislikes.forEach(function (d) {
+      if (d.category) catCount[d.category] = (catCount[d.category] || 0) + 1;
+      if (d.language) langCount[d.language] = (langCount[d.language] || 0) + 1;
+    });
+    return { catCount: catCount, langCount: langCount, total: state.dislikes.length };
   }
 
   function isFav(fullName) {
@@ -169,30 +239,46 @@
     if (ageDays != null) foot.push('<span class="foot-item">' + ageDays + ' 天</span>');
     if (onBoard != null) foot.push('<span class="foot-item">在榜 ' + onBoard + ' 天</span>');
 
-    return '<article class="row" data-repo="' + esc(r.full_name) + '" data-board="' + board + '" tabindex="0" role="button">'
+    var disliked = isDisliked(r.full_name);
+    return '<article class="row' + (disliked ? ' is-disliked' : '') + '" data-repo="' + esc(r.full_name)
+      + '" data-board="' + board + '" tabindex="0" role="button">'
       + '<div class="row-head">'
       +   '<span class="rank">' + (r.rank != null ? r.rank : '') + '</span>'
       +   '<span class="repo"><span class="owner">' + esc(owner) + '/</span>' + esc(name) + '</span>'
       +   gainHtml(r)
+      +   '<button class="act-btn act-dislike' + (disliked ? ' is-on' : '') + '"'
+      +     ' data-act="dislike" data-repo="' + esc(r.full_name) + '"'
+      +     ' title="' + (disliked ? '取消踩' : '不感兴趣，以后少推类似的') + '"'
+      +     ' aria-label="' + (disliked ? '取消踩' : '踩') + '">'
+      +     (disliked ? '👎' : '👎') + '</button>'
       + '</div>'
       + '<div class="desc' + (d.empty ? ' is-empty' : '') + '">'
       +   (d.fallback ? '<span class="desc-tag">原文</span>' : '')
       +   esc(d.text) + '</div>'
       + '<div class="row-foot">' + foot.join('') + '</div>'
       + renderBadges(r)
+      + (disliked ? '<div class="disliked-note">已标记不感兴趣</div>' : '')
       + '</article>';
   }
 
   /* ---------------- 榜单渲染 ---------------- */
+  /** 按「踩」过滤后的榜单。已踩项目默认隐藏，可切换显示。 */
+  function visibleRows(rows) {
+    if (state.showDisliked) return rows;
+    return rows.filter(function (r) { return !isDisliked(r.full_name); });
+  }
+
   function renderBoards() {
     var snap = state.snap;
-    var growth = (snap && snap.growth) || [];
-    var rising = (snap && snap.rising) || [];
+    var growth = visibleRows((snap && snap.growth) || []);
+    var rising = visibleRows((snap && snap.rising) || []);
+    var hiddenG = ((snap && snap.growth) || []).length - growth.length;
+    var hiddenR = ((snap && snap.rising) || []).length - rising.length;
 
     var gHead = '<div class="board-head"><span>涨星榜 · 当日增量</span><span>'
-      + growth.length + ' 条</span></div>';
+      + growth.length + ' 条' + (hiddenG > 0 ? ' · 已隐藏 ' + hiddenG : '') + '</span></div>';
     var rHead = '<div class="board-head"><span>新锐榜 · 60 天内新建</span><span>'
-      + rising.length + ' 条</span></div>';
+      + rising.length + ' 条' + (hiddenR > 0 ? ' · 已隐藏 ' + hiddenR : '') + '</span></div>';
 
     $('board-growth').innerHTML = gHead + (growth.length
       ? '<div class="grid">' + growth.map(function (r) { return rowHtml(r, 'growth'); }).join('') + '</div>'
@@ -203,10 +289,29 @@
       : '<div class="empty">该日无新锐榜数据</div>');
 
     renderFavs();
+    renderDislikes();
     bindRows();
   }
 
   function bindRows() {
+    // 踩按钮：单独绑定，阻止冒泡
+    Array.prototype.forEach.call(document.querySelectorAll('.act-dislike'), function (btn) {
+      btn.addEventListener('click', function (ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+        var repo = btn.getAttribute('data-repo');
+        if (isDisliked(repo)) {
+          removeDislike(repo);
+          toast('已取消标记');
+        } else {
+          var rec = findRepo(repo);
+          addDislike(repo, rec || {});
+          toast('已标记不感兴趣，以后会少推类似的');
+        }
+        renderBoards();
+      });
+    });
+
     Array.prototype.forEach.call(document.querySelectorAll('.row'), function (el) {
       el.addEventListener('click', function () {
         openDetail(el.getAttribute('data-repo'), el.getAttribute('data-board'));
@@ -264,6 +369,133 @@
         if (i >= 0) { state.favs[i].note = e.target.value; saveFavs(); }
       });
     });
+  }
+
+  /* ---------------- 不感兴趣页 ---------------- */
+  function renderDislikes() {
+    var box = $('board-dislikes');
+    if (!box) return;
+    var list = state.dislikes;
+    if (!list.length) {
+      box.innerHTML = '<div class="empty">还没有标记「不感兴趣」。<br>'
+        + '在榜单里点每行右上角的 👎，或打开详情点「不感兴趣」，<br>'
+        + '以后就会少推这类项目。</div>';
+      return;
+    }
+
+    var prof = preferenceProfile();
+    // 偏好画像：被踩最多的分类
+    var topCats = Object.keys(prof.catCount).sort(function (a, b) {
+      return prof.catCount[b] - prof.catCount[a];
+    }).slice(0, 4);
+    var topLangs = Object.keys(prof.langCount).sort(function (a, b) {
+      return prof.langCount[b] - prof.langCount[a];
+    }).slice(0, 4);
+
+    var html = '<div class="pref-panel">'
+      + '<div class="pref-title">你的偏好画像</div>'
+      + '<div class="pref-row"><span class="pref-k">已踩项目</span><span class="pref-v">'
+      + list.length + ' 个</span></div>';
+
+    if (topCats.length) {
+      html += '<div class="pref-row"><span class="pref-k">少推分类</span><span class="pref-v">'
+        + topCats.map(function (c) { return esc(c) + ' ×' + prof.catCount[c]; }).join('、')
+        + '</span></div>';
+    }
+    if (topLangs.length) {
+      html += '<div class="pref-row"><span class="pref-k">少推语言</span><span class="pref-v">'
+        + topLangs.map(function (l) { return esc(langLabel(l)) + ' ×' + prof.langCount[l]; }).join('、')
+        + '</span></div>';
+    }
+
+    html += '<div class="pref-actions">'
+      + '<button class="mini-btn" id="exportPrefs">导出偏好给每日任务</button>'
+      + '<button class="mini-btn" id="copyPrefs">复制偏好 JSON</button>'
+      + '</div>'
+      + '<div class="pref-hint">导出后放到 <code>data/preferences.json</code>，'
+      + '明天的抓取会自动剔除这些项目并降低同类权重。</div>'
+      + '</div>';
+
+    html += '<div class="fav-note">共 ' + list.length + ' 个不感兴趣 · 按时间倒序</div>';
+    html += list.map(function (d) {
+      var dt = new Date(d.addedAt);
+      var when = isNaN(dt.getTime()) ? '' : dt.toISOString().slice(0, 10);
+      return '<div class="fav-item dislike-item" data-repo="' + esc(d.repo) + '">'
+        + '<div class="fav-top">'
+        +   '<span class="repo">' + esc(d.repo) + '</span>'
+        +   '<span class="fav-actions">'
+        +     '<button class="mini-btn" data-act="open">详情</button>'
+        +     '<button class="mini-btn" data-act="undo">撤销</button>'
+        +   '</span>'
+        + '</div>'
+        + '<div class="fav-meta">标记于 ' + esc(when)
+        +   (d.category ? ' · ' + esc(d.category) : '')
+        +   (d.language ? ' · ' + esc(langLabel(d.language)) : '') + '</div>'
+        + '</div>';
+    }).join('');
+
+    box.innerHTML = html;
+
+    Array.prototype.forEach.call(box.querySelectorAll('.dislike-item'), function (el) {
+      var repo = el.getAttribute('data-repo');
+      el.querySelector('[data-act="open"]').addEventListener('click', function () {
+        openDetail(repo, 'dislikes');
+      });
+      el.querySelector('[data-act="undo"]').addEventListener('click', function () {
+        removeDislike(repo);
+        renderDislikes();
+        renderBoards();
+        toast('已撤销');
+      });
+    });
+
+    var btnExport = $('exportPrefs');
+    if (btnExport) btnExport.addEventListener('click', exportPreferences);
+    var btnCopy = $('copyPrefs');
+    if (btnCopy) btnCopy.addEventListener('click', copyPreferences);
+  }
+
+  /** 偏好数据的标准结构，供 fetch.py 读取 */
+  function buildPreferences() {
+    var prof = preferenceProfile();
+    return {
+      version: 1,
+      updated_at: new Date().toISOString(),
+      dislikes: state.dislikes.map(function (d) { return d.repo; }),
+      downrank_categories: Object.keys(prof.catCount).filter(function (c) {
+        return prof.catCount[c] >= 2;
+      }),
+      downrank_languages: Object.keys(prof.langCount).filter(function (l) {
+        return prof.langCount[l] >= 2;
+      }),
+      favs: state.favs.map(function (f) { return f.repo; }),
+      stats: { dislikes: state.dislikes.length, favs: state.favs.length }
+    };
+  }
+
+  function exportPreferences() {
+    var data = buildPreferences();
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'preferences.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    toast('已下载 preferences.json，放到 data/ 目录即可生效');
+  }
+
+  function copyPreferences() {
+    var txt = JSON.stringify(buildPreferences(), null, 2);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(function () {
+        toast('偏好 JSON 已复制');
+      }).catch(function () { toast('复制失败，请用导出按钮'); });
+    } else {
+      toast('当前浏览器不支持剪贴板，请用导出按钮');
+    }
   }
 
   /* ---------------- 详情 ---------------- */
@@ -387,11 +619,14 @@
       html += '<div class="d-section-t">本期标记</div>' + renderBadges(common);
     }
 
+    var disliked = isDisliked(repo);
     html += '<div class="d-actions">'
       + '<a class="btn btn-primary" href="' + esc(common.html_url || ('https://github.com/' + repo))
       + '" target="_blank" rel="noopener noreferrer">在 GitHub 打开 ↗</a>'
       + '<button class="btn btn-fav' + (fav ? ' is-on' : '') + '" id="favBtn">'
       + (fav ? '★ 已收藏' : '☆ 收藏') + '</button>'
+      + '<button class="btn btn-dislike' + (disliked ? ' is-on' : '') + '" id="dislikeBtn">'
+      + (disliked ? '👎 已踩' : '👎 不感兴趣') + '</button>'
       + '</div>';
 
     body.innerHTML = html;
@@ -404,7 +639,29 @@
       this.textContent = nowFav ? '★ 已收藏' : '☆ 收藏';
       this.classList.toggle('is-on', nowFav);
       toast(nowFav ? '已加入收藏' : '已从收藏移除');
+      // 收藏时自动取消踩
+      if (nowFav && isDisliked(repo)) {
+        removeDislike(repo);
+        var db = $('dislikeBtn');
+        if (db) { db.textContent = '👎 不感兴趣'; db.classList.remove('is-on'); }
+      }
       renderFavs();
+      renderDislikes();
+    });
+
+    $('dislikeBtn').addEventListener('click', function () {
+      var on = isDisliked(repo);
+      if (on) {
+        removeDislike(repo);
+        toast('已取消标记');
+      } else {
+        addDislike(repo, common);
+        toast('已标记不感兴趣，以后会少推类似的');
+      }
+      this.textContent = on ? '👎 不感兴趣' : '👎 已踩';
+      this.classList.toggle('is-on', !on);
+      renderFavs();
+      renderDislikes();
     });
   }
 
