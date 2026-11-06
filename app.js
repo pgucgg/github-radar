@@ -125,19 +125,45 @@
       + (g >= 0 ? '+' : '') + fmtFull(g) + '</span>';
   }
 
+  /* 中文简介优先；没有中文则回退英文首句，并标注「英文原文」 */
+  /* 常见编程语言的中文名 */
+  var LANG_ZH = {
+    'JavaScript': 'JavaScript', 'TypeScript': 'TypeScript', 'Python': 'Python',
+    'Rust': 'Rust', 'Go': 'Go', 'Java': 'Java', 'C': 'C', 'C++': 'C++', 'C#': 'C#',
+    'Ruby': 'Ruby', 'PHP': 'PHP', 'Swift': 'Swift', 'Kotlin': 'Kotlin',
+    'Shell': 'Shell', 'HTML': 'HTML', 'CSS': 'CSS', 'Vue': 'Vue', 'Dart': 'Dart',
+    'Zig': 'Zig', 'Lua': 'Lua', 'Haskell': 'Haskell', 'Elixir': 'Elixir',
+    'Jupyter Notebook': 'Jupyter 笔记本', 'Unknown': '未标注'
+  };
+
+  function langLabel(lang) {
+    if (!lang) return '未标注';
+    return LANG_ZH[lang] || lang;
+  }
+
+  function descOf(r) {
+    if (r.desc_zh && r.desc_zh.length >= 4) return { text: r.desc_zh, fallback: false };
+    if (r.desc_en_short) return { text: r.desc_en_short, fallback: true };
+    if (r.description) return { text: r.description, fallback: true };
+    return { text: '暂无简介', fallback: false, empty: true };
+  }
+
   function rowHtml(r, board) {
     var parts = (r.full_name || '').split('/');
     var owner = parts[0] || '';
     var name = parts[1] || r.full_name;
-    var desc = r.description || '';
+    var d = descOf(r);
     var lang = r.language || '';
     var ageDays = r.age_days;
     var onBoard = r.on_board_days;
 
     var foot = [];
+    if (r.category) {
+      foot.push('<span class="foot-item cat-tag">' + esc(r.category) + '</span>');
+    }
     foot.push('<span class="foot-item">' +
       '<i class="lang-dot" style="background:' + langColor(lang) + '"></i>' +
-      esc(lang || '未知') + '</span>');
+      esc(langLabel(lang)) + '</span>');
     foot.push('<span class="foot-item">★ ' + fmtNum(r.stars) + '</span>');
     foot.push('<span class="foot-item">⑂ ' + fmtNum(r.forks) + '</span>');
     if (ageDays != null) foot.push('<span class="foot-item">' + ageDays + ' 天</span>');
@@ -149,8 +175,9 @@
       +   '<span class="repo"><span class="owner">' + esc(owner) + '/</span>' + esc(name) + '</span>'
       +   gainHtml(r)
       + '</div>'
-      + '<div class="desc' + (desc ? '' : ' is-empty') + '">'
-      +   esc(desc || '暂无简介') + '</div>'
+      + '<div class="desc' + (d.empty ? ' is-empty' : '') + '">'
+      +   (d.fallback ? '<span class="desc-tag">原文</span>' : '')
+      +   esc(d.text) + '</div>'
       + '<div class="row-foot">' + foot.join('') + '</div>'
       + renderBadges(r)
       + '</article>';
@@ -335,7 +362,11 @@
     var html = '<div class="d-title"><span style="color:var(--txt-dim)">' + esc(parts[0] || '') + '/</span>'
       + esc(parts[1] || repo) + '</div>';
 
-    html += '<div class="d-desc">' + esc(common.description || '暂无简介') + '</div>';
+    var dd = descOf(common);
+    html += '<div class="d-desc">' + esc(dd.text) + '</div>';
+    if (common.category) {
+      html += '<div class="d-cat">分类：' + esc(common.category) + '</div>';
+    }
     html += '<div class="d-stats">' + stats.map(function (s) {
       return '<div class="d-stat"><div class="d-stat-k">' + esc(s[0]) + '</div>'
         + '<div class="d-stat-v">' + esc(s[1]) + '</div></div>';
